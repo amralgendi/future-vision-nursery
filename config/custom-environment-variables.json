@@ -1,0 +1,7 @@
+{
+    "adminToken": "fv_adminToken",
+    "dbuser": "fv_dbuser",
+    "dbpassword": "fv_dbpassword",
+    "email": "fv_email",
+    "emailPassword": "fv_emailPassword"
+}

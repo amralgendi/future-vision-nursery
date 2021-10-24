@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Add Student</title>
+</head>
+<body>
+    <nav>
+        <a id="home" href="index.html">Home</a>
+        <a id="back" href="students.html">Back</a>
+        <a href="http://www.futurevisionnursery.com/">Back to Website</a>        
+    </nav>
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="title">
+                Register New Student
+            </div>
+            <div class="form">
+                <div class="subtitle">
+                    Student <span dir="rtl">الطالب</span>
+                </div>
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="name" type="text" class="input" placeholder="Enter First Three Names">
+                    <label dir="rtl"> اسم الطالب الثلاثي</label>
+                </div>
+                <div class="input-field">
+                    <label>Civil ID</label>
+                    <input id="civilId" type="text" class="input" placeholder="Enter 12 digits">
+                    <label dir="rtl">الرقم المدني</label>
+                </div>
+                <div class="input-field">
+                    <label>Gender</label>
+                    <div class="custom-select">
+                        <select id="gender">
+                            <option value="">Choose Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <label dir="rtl">النوع</label>
+                </div>
+                <div class="input-field">
+                    <label>birth Date</label>
+                    <input id="birthDate" type="date" class="input">
+                    <label dir="rtl">تاريخ الميلاد</label>
+                </div>
+                <div class="input-field">
+                    <label>Birth Place</label>
+                    <div class="custom-select">
+                        <select id="birthPlace">
+                        </select>
+                    </div>
+                    <label dir="rtl">مكان الميلاد</label>
+                </div>
+                <div class="input-field">
+                    <label>Nationality</label>
+                    <div class="custom-select">
+                        <select id="nationality">
+                        </select>
+                    </div>
+                    <label dir="rtl">الجنسية</label>
+                </div>
+                <div class="input-field">
+                    <label>Religion</label>
+                    <div class="custom-select">
+                        <select id="religion">
+                            <option value="">Choose Religion</option>
+                            <option value="Muslim">Muslim</option>
+                            <option value="Christian">Christian</option>
+                        </select>
+                    </div>
+                    <label dir="rtl">الديانة</label>
+                </div>
+                <div class="input-field">
+                    <label>Branch</label>
+                    <div class="custom-select">
+                        <select id="branch">
+                            <option value="">Choose Branch</option>
+                            <option value="Qadsiya">Qadsiya</option>
+                            <option value="Qusoor">Qusoor</option>
+                        </select>
+                    </div>
+                    <label dir="rtl">الفرع</label>
+                </div>
+                <div class="input-field">
+                    <label>Class</label>
+                    <div class="custom-select">
+                        <select id="class">
+                            <option value="">Choose Class</option>
+                            <option value="Infants">Infants</option>
+                            <option value="Toddlers">Toddlers</option>
+                            <option value="Pre-k">Pre-k</option>
+                            <option value="Kindergarten">Kindergarten</option>
+                        </select>
+                    </div>
+                    <label dir="rtl">الصف</label>
+                </div>
+                <div class="subtitle">
+                    Guardian (father) <span dir="rtl">ولي الأمر (الأب)</span>
+                </div>
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="guardianName" type="text" class="input" placeholder="Enter Name">
+                    <label dir="rtl">الاسم</label>
+                </div>
+                <div class="input-field">
+                    <label>Nationality</label>
+                    <div class="custom-select">
+                        <select id="guardianNationality">
+                        </select>
+                    </div>
+                    <label dir="rtl">الجنسية</label>
+                </div>
+                <div class="input-field">
+                    <label>Personal Phone</label>
+                    <input id="guardianPhonePersonal" type="text" class="input" placeholder="Enter 8 digits">
+                    <label dir="rtl">الهاتف النقال</label>
+                </div>
+                <div class="input-field">
+                    <label>Work Phone</label>
+                    <input id="guardianPhoneWork" type="text" class="input" placeholder="Enter 8 digits">
+                    <label dir="rtl">هاتف العمل</label>
+                </div>
+                <div class="input-field">
+                    <label>Profession</label>
+                    <input id="guardianJob" type="text" class="input" placeholder="Enter Profession">
+                    <label dir="rtl">الوظيفة</label>
+                </div>
+                <div class="input-field">
+                    <label>Job Location</label>
+                    <input id="guardianJobLocation" type="text" class="input" placeholder="Enter Job Location">
+                    <label dir="rtl">مكان العمل</label>
+                </div>
+                <div class="subtitle">
+                    Guardian (Mother) <span dir="rtl">ولي الأمر (الأم)</span>
+                </div>
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="motherName" type="text" class="input" placeholder="Enter Name">
+                    <label dir="rtl">الاسم</label>
+                </div>
+                <div class="input-field">
+                    <label>Nationality</label>
+                    <div class="custom-select">
+                        <select id="motherNationality">
+                        </select>
+                    </div>
+                    <label dir="rtl">الجنسية</label>
+                </div>
+                <div class="input-field">
+                    <label>Personal Phone</label>
+                    <input id="motherPhonePersonal" type="text" class="input" placeholder="Enter 8 digits">
+                    <label dir="rtl">الهاتف النقال</label>
+                </div>
+                <div class="input-field">
+                    <label>Work Phone</label>
+                    <input id="motherPhoneWork" type="text" class="input" placeholder="Enter 8 digits">
+                    <label dir="rtl">هاتف العمل</label>
+                </div>
+                <div class="input-field">
+                    <label>Profession</label>
+                    <input id="motherJob" type="text" class="input" placeholder="Enter Profession">
+                    <label dir="rtl">الوظيفة</label>
+                </div>
+                <div class="input-field">
+                    <label>Job Location</label>
+                    <input id="motherJobLocation" type="text" class="input" placeholder="Enter Job Location">
+                    <label dir="rtl">مكان العمل</label>
+                </div>
+                <div id="result" class="result"></div>
+                <div class="input-field">
+                    <input onclick="addUser()" id="submit" type="submit" value="Add User" class="btn">
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="countryList.js"></script>
+    <script>
+        console.log(countryList);
+        //ELEMENTS
+        const name = document.getElementById('name');
+        const gender = document.getElementById('gender');
+        const birthDate = document.getElementById('birthDate');
+        const birthPlace = document.getElementById('birthPlace');
+        const nationality = document.getElementById('nationality');
+        const religion = document.getElementById('religion');
+        const civilId = document.getElementById('civilId');
+        const branch = document.getElementById('branch');
+        const classs = document.getElementById('class');
+        const guardianName = document.getElementById('guardianName');
+        const guardianNationality = document.getElementById('guardianNationality');
+        const guardianPhonePersonal = document.getElementById('guardianPhonePersonal');
+        const guardianPhoneWork = document.getElementById('guardianPhoneWork');
+        const guardianJob = document.getElementById('guardianJob');
+        const guardianJobLocation = document.getElementById('guardianJobLocation');
+        const motherName = document.getElementById('motherName');
+        const motherNationality = document.getElementById('motherNationality');
+        const motherPhonePersonal = document.getElementById('motherPhonePersonal');
+        const motherPhoneWork = document.getElementById('motherPhoneWork');
+        const motherJob = document.getElementById('motherJob');
+        const motherJobLocation = document.getElementById('motherJobLocation');
+        const result = document.getElementById('result');
+        const submit = document.getElementById('submit');
+
+
+        function addCountries(element){
+            const countryArr = ['<option value="">Choose Country</option>'];
+            for(let i = 0; i < countryList.length; i++){
+                countryArr.push(`<option value="${countryList[i]}">${countryList[i]}</option>`)
+            }
+            element.innerHTML = countryArr.join('<br>');
+        }
+
+        addCountries(birthPlace);
+        addCountries(nationality);
+        addCountries(guardianNationality);
+        addCountries(motherNationality);
+        // birthPlace.append('<option>hey</option>');
+        // birthPlace.append = '<option>sup</option>';
+
+
+
+
+        async function addUser(){
+            result.innerHTML = 'Please wait...'
+
+            const { data } = await axios.post('/api/users/register', {
+                name: name.value,
+                gender: gender.value,
+                birthDate: birthDate.value,
+                birthPlace: birthPlace.value,
+                nationality: nationality.value,
+                religion: religion.value,
+                civilId: civilId.value,
+                branch: branch.value,
+                class: classs.value,
+                guardian: {
+                    name: guardianName.value,
+                    nationality: guardianNationality.value,
+                    phone: {
+                        personal: guardianPhonePersonal.value,
+                        work: guardianPhoneWork.value,
+                    },
+                    job: guardianJob.value,
+                    jobLocation: guardianJobLocation.value,
+                },
+                mother: {
+                    name: motherName.value,
+                    nationality: motherNationality.value,
+                    phone: {
+                        personal: motherPhonePersonal.value,
+                        work: motherPhoneWork.value,
+                    },
+                    job: motherJob.value,
+                    jobLocation: motherJobLocation.value,
+                }
+            })
+            result.innerHTML = data.message;
+        }
+    </script>
+
+
+
+
+
+    <!-- <script>
+    const submit = document.getElementById('submit');
+    submit.addEventListener('click', async(e)=>{
+        e.preventDefault();
+        const civilId = document.getElementById('civilId');
+        const branch = document.getElementById('branch');
+
+        const {data} = await axios.post('/api/non-registered/new', {
+            civilId: civilId.value, branch : branch.value
+        });
+
+        const result = document.getElementById('result');
+        
+        console.log(data);
+        
+        if(data.success) civilId.value = "";
+        result.innerHTML = data.message;
+
+    });
+
+    </script> -->
+</body>
+</html>

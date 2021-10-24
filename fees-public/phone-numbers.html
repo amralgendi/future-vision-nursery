@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Edit Fees</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="records.html">Back</a>
+        <a href="https://www.futurevisionnursery.com/">Back to Website</a>
+
+    </nav>
+    <div class="container">
+        <div class="wrapper">
+            <div class="search">
+                <div class="form">
+                    <div class="input-field">
+                        <input oninput="searchCivilId()" id="civilIdSearch" placeholder="Search Student by Civil ID" type="text" class="input">
+                    </div>
+                    <!-- <div id="resultSearch" class="result"></div> -->
+                    <!-- <div class="input-field">
+                        <input onclick="searchCivilId()" id="submitCivilId" type="submit" value="Search by Civil ID" class="btn">
+                    </div> -->
+                </div>
+                <div class="form">
+                    <div class="input-field">
+                        <input oninput="searchName()" id="nameSearch" placeholder="Search Student by Name" type="text" class="input">
+                    </div>
+                    <!-- <div class="input-field">
+                        <input onclick="searchName()" id="submitName" type="submit" value="Search by Name" class="btn">
+                    </div> -->
+                </div>
+            </div>
+            <div id="resultSearch" class="result"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Civil ID</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="wrapper">
+            <div class="title">
+                Student Phone Number
+            </div>
+            <div id="form" class="form">
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="name" type="text" class="input" disabled>
+                    <label dir="rtl"> اسم الطالب</label>
+                </div>
+                <div class="input-field">
+                    <label>Civil ID</label>
+                    <input id="civilId" type="text" class="input" disabled>
+                    <label dir="rtl">الرقم المدني</label>
+                </div>
+                <div class="input-field">
+                    <label>Father Phone Numbers</label>
+                    <input id="father" type="text" class="input" disabled>
+                    <label dir="rtl">أرقام تلفون الأب</label>
+                </div>
+                <div class="input-field">
+                    <label>Mother Phone Numbers</label>
+                    <input id="mother" type="text" class="input" disabled>
+                    <label dir="rtl">أرقام تلفون الأم</label>
+                </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const table = document.querySelector('.table');
+        const nameSearch = document.getElementById('nameSearch');
+        const civilIdSearch = document.getElementById('civilIdSearch');
+        const submitName = document.getElementById('submitName');
+        const name = document.getElementById('name');
+        const civilId = document.getElementById('civilId');
+        const resultSearch = document.getElementById('resultSearch');
+        const form = document.getElementById('form');
+        const father = document.getElementById('father');
+        const mother = document.getElementById('mother');
+
+        let rows = [];
+
+
+        async function getData(e){
+            console.log(e.parentNode.parentNode.childNodes[2].innerHTML);
+
+            form.scrollIntoView();
+            const { data } = await axios.get(`api/users/${e.parentNode.parentNode.childNodes[2].innerHTML}`);
+            
+            const student = data.data;
+
+            name.value = student.name;
+            civilId.value = student.civilId;
+            father.value = `${student.guardian.phone.personal} - ${student.guardian.phone.work}`;
+            mother.value = `${student.mother.phone.personal} - ${student.mother.phone.work}`;
+        }
+
+        function newTable(){
+            for(let i = 0; i < rows.length; i++){
+                rows[i].remove();
+            }
+            rows = [];
+        }
+
+        async function searchName(){
+
+            if(nameSearch.value < 1) {
+                return await getAll();
+            }
+
+            const { data } = await axios.get(`/api/users/fees?name=${nameSearch.value}`);
+
+            console.log(nameSearch.value);
+            console.log(data);
+
+            if(data.data.length !== 0) {
+                newTable();
+                resultSearch.innerHTML = "";
+                students = data.data;
+                for(let i = 0, counter = 1; i < students.length; i++, counter++) {
+                    rows.push(table.insertRow());
+                    rows[i].insertCell().innerHTML = counter;
+                    rows[i].insertCell().innerHTML = students[i].name;
+                    rows[i].insertCell().innerHTML = students[i].civilId;
+                    rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+            }
+            } else {
+                resultSearch.innerHTML = "Could't find any student"
+            }
+            
+            
+        }
+
+        async function searchCivilId(){
+
+            if(civilIdSearch.value < 1) {
+                return await getAll();
+            };
+
+            const { data } = await axios.get(`/api/users/fees?civilId=${civilIdSearch.value}`);
+
+            // console.log(`/api/users/fees?name=${civilId.value}`);
+            // console.log(data);
+
+            if(data.data.length !== 0) {
+                newTable();
+                resultSearch.innerHTML = "";
+                students = data.data;
+                for(let i = 0, counter = 1; i < students.length; i++, counter++) {
+                    rows.push(table.insertRow());
+                    rows[i].insertCell().innerHTML = counter;
+                    rows[i].insertCell().innerHTML = students[i].name;
+                    rows[i].insertCell().innerHTML = students[i].civilId;
+                    rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+            }
+            } else {
+                resultSearch.innerHTML = "Could't find any student"
+            }
+            
+            
+        }
+
+        async function getAll(){
+            const { data } = await axios.get('/api/users/fees');
+            if (!data.success) resultSearch.innerHTML = data.message
+            newTable()
+            const students = data.data
+            console.log(students);
+            for(let i = 0, counter = 1; i < data.data.length; i++, counter++) {
+                rows.push(table.insertRow());
+                rows[i].insertCell().innerHTML = counter;
+                rows[i].insertCell().innerHTML = students[i].name;
+                rows[i].insertCell().innerHTML = students[i].civilId;
+                rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+
+            }
+            console.log(data.data);
+        }
+        getAll()
+    </script>
+</body>
+</html>

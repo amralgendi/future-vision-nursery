@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Inquiry</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="students.html">Back</a>
+        <a href="https://www.futurevisionnursery.com/">Back to Website</a>
+
+    </nav>
+    <div class="container">
+        <div class="wrapper">
+            <div class="search">
+                <div class="form">
+                    <div class="input-field">
+                        <input oninput="searchCivilId()" id="civilIdSearch" placeholder="Search Student by Civil ID" type="text" class="input">
+                    </div>
+                </div>
+                <div class="form">
+                    <div class="input-field">
+                        <input oninput="searchName()" id="nameSearch" placeholder="Search Student by Name" type="text" class="input">
+                    </div>
+                </div>
+            </div>
+            <div id="resultSearch" class="result"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Civil ID</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="wrapper">
+            <div class="title">
+                Student Inquiry
+            </div>
+            <div id="form" class="form">
+                <div class="subtitle">
+                    Student <span dir="rtl">الطالب</span>
+                </div>
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="name" type="text" class="input" disabled>
+                    <label dir="rtl"> اسم الطالب الثلاثي</label>
+                </div>
+                <div class="input-field">
+                    <label>Gender</label>
+                        <input id="gender" type="text" class="input" disabled>
+                    <label dir="rtl">النوع</label>
+                </div>
+                <div class="input-field">
+                    <label>birth Date</label>
+                    <input id="birthDate" type="text" class="input" disabled>
+                    <label dir="rtl">تاريخ الميلاد</label>
+                </div>
+                <div class="input-field">
+                    <label>Birth Place</label>
+                    <input id="birthPlace" type="text" class="input" disabled>
+                    <label dir="rtl">مكان الميلاد</label>
+                </div>
+                <div class="input-field">
+                    <label>Nationality</label>
+                        <input id="nationality" type="text" class="input" disabled>
+                    <label dir="rtl">الجنسية</label>
+                </div>
+                <div class="input-field">
+                    <label>Religion</label>
+                        <input id="religion" type="text" class="input" disabled>
+                    <label dir="rtl">الديانة</label>
+                </div>
+                <div class="input-field">
+                    <label>Civil ID</label>
+                    <input id="civilId" type="text" class="input" disabled>
+                    <label dir="rtl">الرقم المدني</label>
+                </div>
+                <div class="input-field">
+                    <label>Branch</label>
+                    <input id="branch" type="text" class="input" disabled>
+                    <label dir="rtl">الفرع</label>
+                </div>
+                <div class="input-field">
+                    <label>Class</label>
+                        <input id="class" type="text" class="input" disabled>
+                    <label dir="rtl">الصف</label>
+                </div>
+                <div class="subtitle">
+                    Guardian (father) <span dir="rtl">ولي الأمر (الأب)</span>
+                </div>
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="guardianName" type="text" class="input" disabled>
+                    <label dir="rtl">الاسم</label>
+                </div>
+                <div class="input-field">
+                    <label>Nationality</label>
+                        <input id="guardianNationality" type="text" class="input" disabled>
+                    <label dir="rtl">الجنسية</label>
+                </div>
+                <div class="input-field">
+                    <label>Personal Phone</label>
+                    <input id="guardianPhonePersonal" type="text" class="input" disabled>
+                    <label dir="rtl">الهاتف النقال</label>
+                </div>
+                <div class="input-field">
+                    <label>Work Phone</label>
+                    <input id="guardianPhoneWork" type="text" class="input" disabled>
+                    <label dir="rtl">هاتف العمل</label>
+                </div>
+                <div class="input-field">
+                    <label>Profession</label>
+                    <input id="guardianJob" type="text" class="input" disabled>
+                    <label dir="rtl">الوظيفة</label>
+                </div>
+                <div class="input-field">
+                    <label>Job Location</label>
+                    <input id="guardianJobLocation" type="text" class="input" disabled>
+                    <label dir="rtl">مكان العمل</label>
+                </div>
+                <div class="subtitle">
+                    Guardian (Mother) <span dir="rtl">ولي الأمر (الأم)</span>
+                </div>
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="motherName" type="text" class="input" disabled>
+                    <label dir="rtl">الاسم</label>
+                </div>
+                <div class="input-field">
+                    <label>Nationality</label>
+                        <input id="motherNationality" type="text" class="input" disabled>
+                    <label dir="rtl">الجنسية</label>
+                </div>
+                <div class="input-field">
+                    <label>Personal Phone</label>
+                    <input id="motherPhonePersonal" type="text" class="input" disabled>
+                    <label dir="rtl">الهاتف النقال</label>
+                </div>
+                <div class="input-field">
+                    <label>Work Phone</label>
+                    <input id="motherPhoneWork" type="text" class="input" disabled>
+                    <label dir="rtl">هاتف العمل</label>
+                </div>
+                <div class="input-field">
+                    <label>Profession</label>
+                    <input id="motherJob" type="text" class="input" disabled>
+                    <label dir="rtl">الوظيفة</label>
+                </div>
+                <div class="input-field">
+                    <label>Job Location</label>
+                    <input id="motherJobLocation" type="text" class="input" disabled>
+                    <label dir="rtl">مكان العمل</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const table = document.querySelector('.table');
+        const nameSearch = document.getElementById('nameSearch');
+        const civilIdSearch = document.getElementById('civilIdSearch');
+        const submitName = document.getElementById('submitName');
+        const result = document.getElementById('result');
+        const resultSearch = document.getElementById('resultSearch');
+        const form = document.getElementById('form');
+
+
+        //FORM
+        const name = document.getElementById('name');
+        const gender = document.getElementById('gender');
+        const birthDate = document.getElementById('birthDate');
+        const birthPlace = document.getElementById('birthPlace');
+        const nationality = document.getElementById('nationality');
+        const religion = document.getElementById('religion');
+        const civilId = document.getElementById('civilId');
+        const branch = document.getElementById('branch');
+        const classs = document.getElementById('class');
+        const guardianName = document.getElementById('guardianName');
+        const guardianNationality = document.getElementById('guardianNationality');
+        const guardianPhonePersonal = document.getElementById('guardianPhonePersonal');
+        const guardianPhoneWork = document.getElementById('guardianPhoneWork');
+        const guardianJob = document.getElementById('guardianJob');
+        const guardianJobLocation = document.getElementById('guardianJobLocation');
+        const motherName = document.getElementById('motherName');
+        const motherNationality = document.getElementById('motherNationality');
+        const motherPhonePersonal = document.getElementById('motherPhonePersonal');
+        const motherPhoneWork = document.getElementById('motherPhoneWork');
+        const motherJob = document.getElementById('motherJob');
+        const motherJobLocation = document.getElementById('motherJobLocation');
+
+
+        let rows = [];
+
+
+
+
+
+        async function getData(e){
+            console.log(e.parentNode.parentNode.childNodes[2].innerHTML);
+
+            form.scrollIntoView();
+            const { data } = await axios.get(`api/users/${e.parentNode.parentNode.childNodes[2].innerHTML}`);
+            
+            const student = data.data;
+
+            name.value = student.name;
+            gender.value = student.gender;
+            birthDate.value = student.birthDate.slice(0, 10);
+            birthPlace.value = student.birthPlace;
+            nationality.value = student.nationality;
+            branch.value = student.branch;
+            classs.value = student.class;
+            religion.value = student.religion;
+            civilId.value = student.civilId;
+            guardianName.value = student.guardian.name;
+            guardianNationality.value = student.guardian.nationality;
+            guardianPhonePersonal.value = student.guardian.phone.personal;
+            guardianPhoneWork.value = student.guardian.phone.work;
+            guardianJob.value = student.guardian.job;
+            guardianJobLocation.value = student.guardian.jobLocation;
+            motherName.value = student.mother.name;
+            motherNationality.value = student.mother.nationality;
+            motherPhonePersonal.value = student.mother.phone.personal;
+            motherPhoneWork.value = student.mother.phone.work;
+            motherJob.value = student.mother.job;
+            motherJobLocation.value = student.mother.jobLocation;
+
+
+            // name.value = student.name;
+            // name.value = student.name;
+            // name.value = student.name;
+            // name.value = student.name;
+            // name.value = student.name;
+            // name.value = student.name;
+            // name.value = student.name;
+            // name.value = student.name;
+
+
+            console.log(student);
+        }
+
+        function newTable(){
+            for(let i = 0; i < rows.length; i++){
+                rows[i].remove();
+            }
+            rows = [];
+        }
+
+        async function searchName(){
+
+            if(nameSearch.value < 1) {
+                return await getAll();
+            }
+
+            const { data } = await axios.get(`/api/users/fees?name=${nameSearch.value}`);
+
+            console.log(nameSearch.value);
+            console.log(data);
+
+            if(data.data.length !== 0) {
+                newTable();
+                resultSearch.innerHTML = "";
+                students = data.data;
+                for(let i = 0, counter = 1; i < students.length; i++, counter++) {
+                    rows.push(table.insertRow());
+                    rows[i].insertCell().innerHTML = counter;
+                    rows[i].insertCell().innerHTML = students[i].name;
+                    rows[i].insertCell().innerHTML = students[i].civilId;
+                    rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+            }
+            } else {
+                resultSearch.innerHTML = "Could't find any student"
+            }
+            
+            
+        }
+
+        async function searchCivilId(){
+
+            if(civilIdSearch.value < 1) {
+                return await getAll();
+            };
+
+            const { data } = await axios.get(`/api/users/fees?civilId=${civilIdSearch.value}`);
+
+            // console.log(`/api/users/fees?name=${civilId.value}`);
+            // console.log(data);
+
+            if(data.data.length !== 0) {
+                newTable();
+                resultSearch.innerHTML = "";
+                students = data.data;
+                for(let i = 0, counter = 1; i < students.length; i++, counter++) {
+                    rows.push(table.insertRow());
+                    rows[i].insertCell().innerHTML = counter;
+                    rows[i].insertCell().innerHTML = students[i].name;
+                    rows[i].insertCell().innerHTML = students[i].civilId;
+                    rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+            }
+            } else {
+                resultSearch.innerHTML = "Could't find any student"
+            }
+            
+            
+        }
+
+        async function getAll(){
+            const { data } = await axios.get('/api/users/fees');
+            newTable()
+            if (!data.success) resultSearch.innerHTML = data.message
+            const students = data.data
+            console.log(students);
+            for(let i = 0, counter = 1; i < data.data.length; i++, counter++) {
+                rows.push(table.insertRow());
+                rows[i].insertCell().innerHTML = counter;
+                rows[i].insertCell().innerHTML = students[i].name;
+                rows[i].insertCell().innerHTML = students[i].civilId;
+                rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+
+            }
+            console.log(data.data);
+        }
+        getAll()
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Transactions</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="fees.html">Back</a>
+        <a href="https://www.futurevisionnursery.com/">Back to Website</a>
+
+    </nav>
+    <div class="container">
+        <div class="wrapper">
+            <div class="search">
+                <div class="form">
+                    <div class="input-field">
+                        <input oninput="searchCivilId()" id="civilIdSearch" placeholder="Search Student by Civil ID" type="text" class="input">
+                    </div>
+                </div>
+                <div class="form">
+                    <div class="input-field">
+                        <input oninput="searchName()" id="nameSearch" placeholder="Search Student by Name" type="text" class="input">
+                    </div>
+                </div>
+            </div>
+            <div id="resultSearch" class="result"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Civil ID</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="wrapper" id="fetched">
+            <div class="title">
+                Payment Records
+            </div>
+            <div class="result" id="result"></div>
+            <ul id="dataResult" class="result"></ul>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const table = document.querySelector('.table');
+        const nameSearch = document.getElementById('nameSearch');
+        const civilIdSearch = document.getElementById('civilIdSearch');
+        const result = document.getElementById('result');
+        const dataResult = document.getElementById('dataResult');
+        const resultSearch = document.getElementById('resultSearch');
+        const fetched = document.getElementById('fetched');
+
+
+
+        let rows = [];
+
+
+
+
+
+        async function getData(e){
+            console.log(e.parentNode.parentNode.childNodes[2].innerHTML);
+            const paymentsArr = [];
+            result.innerHTML = "Please wait";
+            dataResult.innerHTML = "";
+
+            const { data } = await axios.get(`api/payments/${e.parentNode.parentNode.childNodes[2].innerHTML}`);
+        
+            // const die = new Date(datesawsan);
+            // console.log(die.toString());
+
+            result.innerHTML = data.message
+
+            for(let i = 0; i < data.data.payments.length; i++){
+                const {date, amount, type} = data.data.payments[i];
+                const dateString = new Date(date);
+                const li = document.createElement('li');
+                li.innerHTML = `Date: ${dateString.toString().slice(0, 24)} <br> Amount: ${amount} <br> Type: ${type}`;
+                dataResult.appendChild(li);
+            }
+            fetched.scrollIntoView()
+            console.log(paymentsArr);
+
+            // console.log(data);
+        }
+
+        function newTable(){
+            for(let i = 0; i < rows.length; i++){
+                rows[i].remove();
+            }
+            rows = [];
+        }
+
+        async function searchName(){
+
+            if(nameSearch.value < 1) {
+                return await getAll();
+            }
+
+            const { data } = await axios.get(`/api/users/fees?name=${nameSearch.value}`);
+
+            console.log(nameSearch.value);
+            console.log(data);
+
+            if(data.data.length !== 0) {
+                newTable();
+                resultSearch.innerHTML = "";
+                students = data.data;
+                for(let i = 0, counter = 1; i < students.length; i++, counter++) {
+                    rows.push(table.insertRow());
+                    rows[i].insertCell().innerHTML = counter;
+                    rows[i].insertCell().innerHTML = students[i].name;
+                    rows[i].insertCell().innerHTML = students[i].civilId;
+                    rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+            }
+            } else {
+                resultSearch.innerHTML = "Could't find any student"
+            }
+            
+            
+        }
+
+        async function searchCivilId(){
+
+            if(civilIdSearch.value < 1) {
+                return await getAll();
+            };
+
+            const { data } = await axios.get(`/api/users/fees?civilId=${civilIdSearch.value}`);
+
+            // console.log(`/api/users/fees?name=${civilId.value}`);
+            // console.log(data);
+
+            if(data.data.length !== 0) {
+                newTable();
+                resultSearch.innerHTML = "";
+                students = data.data;
+                for(let i = 0, counter = 1; i < students.length; i++, counter++) {
+                    rows.push(table.insertRow());
+                    rows[i].insertCell().innerHTML = counter;
+                    rows[i].insertCell().innerHTML = students[i].name;
+                    rows[i].insertCell().innerHTML = students[i].civilId;
+                    rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+            }
+            } else {
+                resultSearch.innerHTML = "Could't find any student"
+            }
+            
+            
+        }
+
+        async function getAll(){
+            const { data } = await axios.get('/api/users/fees');
+            newTable()
+            if (!data.success) resultSearch.innerHTML = data.message
+            const students = data.data
+            console.log(students);
+            for(let i = 0, counter = 1; i < data.data.length; i++, counter++) {
+                rows.push(table.insertRow());
+                rows[i].insertCell().innerHTML = counter;
+                rows[i].insertCell().innerHTML = students[i].name;
+                rows[i].insertCell().innerHTML = students[i].civilId;
+                rows[i].insertCell().innerHTML = `<button onclick="getData(this)">Check</button>`;
+
+            }
+            console.log(data.data);
+        }
+        getAll()
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Admin</title>
+</head>
+<body>
+    <nav>
+        <a id="home" href="index.html">Home</a>
+        <a id="back" href="index.html">Back</a>
+        <a href="http://www.futurevisionnursery.com/">Back to Website</a>
+    </nav>
+    <div class="container">
+        <div class="wrapper">
+            <div class="title">
+                Admin Portal
+            </div>
+            <div class="links">
+                <a id="register" href="register-admin.html">Register</a>
+                <a id="login" href="login-admin.html">Log in</a>
+                <a id="students" href="students.html">Students</a>
+                <a id="fees" href="fees.html">Fees</a>
+                <a id="records" href="records.html">Records</a>
+                <a id="logout" href="/api/admin/logout">Log Out</a>
+            </div>        
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+            const register = document.getElementById('register');
+            const login = document.getElementById('login');
+            const logout = document.getElementById('logout');
+            const students = document.getElementById('students');
+            const fees = document.getElementById('fees');
+            const records = document.getElementById('records');
+            
+            register.style.display = 'none';
+            login.style.display = 'none';
+            logout.style.display = 'none';
+            students.style.display = 'none';
+            fees.style.display = 'none';
+            records.style.display = 'none';
+
+
+        async function check(){
+            const {data} = await axios.get('/api/admin/check');
+            console.log(data);
+
+            if(data.success) {
+                logout.style.display = 'initial';
+                students.style.display = 'initial';
+                fees.style.display = 'initial';
+                records.style.display = 'initial';
+
+            } else {
+                register.style.display = 'initial';
+                login.style.display = 'initial';
+            }
+        }
+        logout.addEventListener('click', async(e)=>{
+            e.preventDefault();
+            const {data} = axios.get('/api/admin/log-out');
+            window.location.reload();
+        })
+        check();
+    </script>
+</body>
+</html>

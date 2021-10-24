@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a id="home" href="index.html">Home</a>
+        <a id="back" href="admin.html">Back</a>
+        <a href="http://www.futurevisionnursery.com/">Back to Website</a>    
+    </nav>
+    <div class="container">
+        <table id="table" class="table">
+            <thead>
+                <tr>
+                    <th>Unique Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Civil ID</th>
+                    <th>Phone Number</th>
+                    <th>Fees</th>
+                    <th>Branch</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+            </tbody>
+        </table>
+    
+        <div class="wrapper">
+            <div class="title">
+                Update User
+            </div>
+            <div id="form" class="form">
+                <div class="input-field">
+                    <label>First Name</label>
+                    <input id="firstName" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Middle Name</label>
+                    <input id="middleName" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Last Name</label>
+                    <input id="lastName" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Civil ID</label>
+                    <input id="civilId" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Phone Number</label>
+                    <input id="phoneNumber" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Fees</label>
+                    <input id="fees" type="number" class="input">
+                </div>
+                <div id="result" class="result"></div>
+                <div class="input-field">
+                    <input id="submit" onclick="updateUser()" type="submit" value="Update User" class="btn">
+                </div>
+            </div>
+        </div>    
+    
+
+    </div>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //form
+        const firstName = document.getElementById('firstName');
+        const middleName = document.getElementById('middleName');
+        const lastName = document.getElementById('lastName');
+        const email = document.getElementById('email');
+        const civilId = document.getElementById('civilId');
+        const phoneNumber = document.getElementById('phoneNumber');
+        const submit = document.getElementById('submit');
+
+        //ELEMENTS
+        const result = document.getElementById('result');
+        const table = document.getElementById('table');
+        const rows = [];
+        const wrapper = document.querySelector('.wrapper');
+        console.log(window.table);
+        
+        async function editUser(e){
+            // console.log(e.parentNode.parentNode.firstChild.innerHTML);
+                const {data} = await axios.get(`/api/users/${e.parentNode.parentNode.firstChild.innerHTML}`)
+                // EDIT USER FROM FORM
+                for(prop in data.data){
+                    if(window[prop]) {
+                        console.log(window[prop]);
+                        window[prop].value = data.data[prop];
+                    }   
+                }
+            }
+
+        async function deleteUser(e){
+            const {data} = await axios.delete(`/api/users/${e.parentNode.parentNode.firstChild.innerHTML}`);
+            console.log(data);
+
+            window.location.reload()
+        }
+
+        async function updateUser(){
+            const {data} = await axios.put('/api/admin/edit-user', {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                // email: email.value,
+                civilId: civilId.value,
+                phoneNumber: phoneNumber.value,
+                fees: fees.value,
+            })
+            result.innerHTML = data.message;
+            if(data.success) {
+                setTimeout(window.location.reload(), 2000)
+            }
+        }
+
+            //ADD TO THE TABLE
+        async function getAll(){
+            const {data} = await axios.get('/api/users');
+            for(let i = 0, counter = 1; i < data.data.length; i++, counter++){
+                rows.push(table.insertRow());
+                // const no = row.insertCell();
+                // no.innerHTML = counter;
+                for(prop in data.data[i]) {
+                    const td = rows[i].insertCell();
+                    td.innerHTML = data.data[i][prop];
+                }
+                    const td = rows[i].insertCell();
+                    td.innerHTML = '<button href="#form" onclick="editUser(this)">edit</button><button href="#form" onclick="deleteUser(this)">delete</button>'
+            }
+            console.log(rows);
+        }
+        getAll()
+    </script>
+</body>
+</html>

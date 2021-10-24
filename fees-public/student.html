@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Student</title>
+</head>
+<body>
+    <nav>
+    <a id="home" href="index.html">Home</a>
+    <a href="http://www.futurevisionnursery.com/">Back to Website</a>   
+    </nav>
+    
+    <div class="container">
+        <div class="wrapper">
+            <div class="title">
+                Student Portal
+            </div>
+            <div class="form">
+                <div class="input-field">
+                    <label>Civil ID</label>
+                    <input id="civilId" type="text" class="input">
+                </div>
+                <div id="passwordLabel" class="input-field">
+                    <label>Password</label>
+                    <input id="password" type="password" class="input">
+                </div>
+                <div id="result" class="result"></div>
+                <div class="input-field">
+                    <input id="firstSubmit" type="submit" value="Check ID" class="btn">
+                </div>
+                <div class="input-field">
+                    <input id="secondSubmit" type="submit" value="Check Fees" class="btn">
+                </div> 
+
+            </div>
+
+            
+        </div>        
+    </div>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const civilId = document.getElementById('civilId');
+        const password = document.getElementById('password');
+        const passwordLabel = document.getElementById('passwordLabel');
+        const result = document.getElementById('result');
+        const firstSubmit = document.getElementById('firstSubmit');
+        const secondSubmit = document.getElementById('secondSubmit');
+
+        passwordLabel.style.display = "none";
+        secondSubmit.style.display = "none";
+
+        firstSubmit.addEventListener('click', async(e)=>{
+            e.preventDefault();
+            result.innerHTML = "";
+            const { data } = await axios.post('/api/users/check-civilId', {
+                civilId: civilId.value
+            })
+
+            if(data.success === true) {
+                passwordLabel.style.display = "flex";
+                firstSubmit.style.display = "none";
+                secondSubmit.style.display = "initial";
+            } else {
+                result.innerHTML = data.message;
+            }
+        });
+
+        secondSubmit.addEventListener('click', async(e)=>{
+            result.innerHTML = "";
+            const {data} = await axios.get(`/api/users/fees/${civilId.value}/${password.value}`)
+            console.log(data);
+            result.innerHTML = data.message
+        })
+
+</script>
+</body>
+
+
+</html>

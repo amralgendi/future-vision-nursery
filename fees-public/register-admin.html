@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="main.css">
+    <title>Portal | Admin Registration</title>
+</head>
+<body>
+    <nav>
+        <a id="home" href="index.html">Home</a>
+        <a id="back" href="admin.html">Back</a>
+        <a href="http://www.futurevisionnursery.com/">Back to Website</a>    
+    </nav>
+    <div class="container">
+        <div class="wrapper">
+            <div class="title">
+                Admin Registration
+            </div>
+            <div class="form">
+                <div class="input-field">
+                    <label>Name</label>
+                    <input id="name" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Email</label>
+                    <input id="email" type="email" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Phone Number</label>
+                    <input id="phoneNumber" type="text" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Password</label>
+                    <input id="password" type="password" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Verify Password</label>
+                    <input id="passwordVerify" type="password" class="input">
+                </div>
+                <div class="input-field">
+                    <label>Admin Password</label>
+                    <input id="passwordAdmin" type="password" class="input">
+                </div>
+                <div id="result" class="result"></div>
+                <div class="input-field">
+                    <input id="submit" type="submit" value="Register" class="btn">
+                </div>
+            </div>
+        </div>        
+    </div>
+
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const submit = document.getElementById('submit');
+    submit.addEventListener('click', async(e)=>{
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const password = document.getElementById('password').value;
+        const passwordVerify = document.getElementById('passwordVerify').value;
+        const passwordAdmin = document.getElementById('passwordAdmin').value;
+
+        const { data } = await axios.post('/api/admin/register', {
+            name, email, phoneNumber, password, passwordVerify, passwordAdmin
+        });
+        const result = document.getElementById('result');
+        
+        result.innerHTML = data.message;
+
+        console.log(data);
+    });
+
+</script>
+</html>
